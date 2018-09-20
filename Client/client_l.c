@@ -1,7 +1,7 @@
 /* HEADER FILE INCLUDES */
-#include <sys/socket.h>		/* for socket(), bind(), connect(), recv() and send() */
+#include <sys/socket.h>	/* for socket(), bind(), connect(), recv() and send() */
 #include <netdb.h>		/* definitions for network database operations */
-#include <netinet/in.h>		/* Internet Protocol family */
+#include <netinet/in.h>	/* Internet Protocol family */
 #include <arpa/inet.h>		/* definitions for internet operations */
 
 #include <stdio.h>		/* for printf() and fprintf() */
@@ -75,18 +75,18 @@ int main()
 void chatting(int * descriptor, int * descriptorUAS, char * nickname) {
 
 	pthread_t threadID;								// thread id
-	struct sockaddr_in client_direct;				// for direct connections to other clients
+	struct sockaddr_in client_direct;						// for direct connections to other clients
 	int echoStringLen=0, temp=0, tempPort=0, userFound=0, recvMsgSize=0, id=0, sock_new_connection=0, clientLength=0;
 	//
-	receive_handler passStructure;					// needed for passing different values to a thread
-	passStructure.socket = *descriptor;				// a socket for a messaging with a data server
+	receive_handler passStructure;							// needed for passing different values to a thread
+	passStructure.socket = *descriptor;						// a socket for a messaging with a data server
 	//
 	char echoString[RCVBUFSIZE], name[NICK_SIZE], myMessage[RCVBUFSIZE]={0}, systemMessage[RCVBUFSIZE], myMessageFull[RCVBUFSIZE]={0};
 
-	memset(echoString,0,strlen(echoString));		// a whole data entered by a user
-	memset(name,0,strlen(name));					// a name of the destination user
-	memset(systemMessage,0,strlen(systemMessage));	// system messsage to a data server
-	memset(&client_direct,0,sizeof(client_direct));	// sin structure for outgoing connections with users
+	memset(echoString,0,strlen(echoString));					// a whole data entered by a user
+	memset(name,0,strlen(name));							// a name of the destination user
+	memset(systemMessage,0,strlen(systemMessage));					// system messsage to a data server
+	memset(&client_direct,0,sizeof(client_direct));					// sin structure for outgoing connections with users
 
 	// initialize an array with the client ids
 	for(int i=0; i<MAX_AVAILABLE_CLIENTS; i++)
@@ -101,9 +101,9 @@ void chatting(int * descriptor, int * descriptorUAS, char * nickname) {
 	fgets(echoString, RCVBUFSIZE, stdin);
 	for (;;) 
 	{
-		printf("*** send a message> ");							// Prompt to send a message
-		if ( fgets(echoString, RCVBUFSIZE, stdin) == NULL ) {	// get a message
-			continue;											// if message is null, ignore entering
+		printf("*** send a message> ");						// Prompt to send a message
+		if ( fgets(echoString, RCVBUFSIZE, stdin) == NULL ) {			// get a message
+			continue;							// if message is null, ignore entering
 		}
 
 		// subtract a returning symbol
@@ -132,7 +132,7 @@ void chatting(int * descriptor, int * descriptorUAS, char * nickname) {
 			fgets(echoString, RCVBUFSIZE, stdin);
 		} else {
 			getDestName(echoString, name);					// set a destination name
-			getMessageBody(echoString, myMessage);			// set a message
+			getMessageBody(echoString, myMessage);				// set a message
 			strcpy(myMessageFull, nickname); strcat(myMessageFull, ":");
 			strcat(myMessageFull, myMessage);
 		}
@@ -142,7 +142,7 @@ void chatting(int * descriptor, int * descriptorUAS, char * nickname) {
 		for(int i=0; i<MAX_AVAILABLE_CLIENTS; i++)
 		{
 			if (passStructure.ids[i] > 0) {
-				temp=passStructure.ids[i];		// store id parameter in a temporary variable
+				temp=passStructure.ids[i];				// store id parameter in a temporary variable
 				// try to find a needed name
 				if ( strstr(passStructure.parameters[temp].nickname, name) && strlen(passStructure.parameters[temp].ip) != 0 && passStructure.parameters[temp].port != 0) {
 					userFound=1;
@@ -153,7 +153,7 @@ void chatting(int * descriptor, int * descriptorUAS, char * nickname) {
 					clientLength=sizeof(client_direct);
 					connection(sock_new_connection,&client_direct,clientLength);
 					if (send(sock_new_connection, myMessageFull, sizeof(myMessageFull), 0) != sizeof(myMessageFull)) printf("ERROR: send() sent a different number of bytes than expected\n");
-					close(sock_new_connection);	// do not forget to close the socket
+					close(sock_new_connection);			// do not forget to close the socket
 					break;
 				}
 			}
