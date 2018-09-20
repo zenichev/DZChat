@@ -3,7 +3,7 @@
 #define LISTEN_IP "127.0.0.1"		// where to listen for direct connections from other clients
 #define SERVER_PORT 5000		// a default port for connections with data server
 #define SERVER_IP "127.0.0.1"		// a default ip for connections with data server
-#define RCVBUFSIZE 1000			// deafult receive buffer size
+#define RCVBUFSIZE 1000		// deafult receive buffer size
 #define NICK_SIZE 20			// maximum nick size
 #define PORT_BIND_MIN 5100		// for listening
 #define PORT_BIND_MAX 5200		// for listening
