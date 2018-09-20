@@ -33,8 +33,8 @@ So for e.g., one client (client A) gets online, and then one more client (client
 - |Feature| Group chatting. This will allow us to create groups and use them to broadcast messages to the members.
 - |Add a new command| '>online;'  - this command will allow users to see the list of online participants anytime.
 - |Add a new transmission functionality| This will allow a newly connected user to get all the data about other users from scratch and not to ask the server for it in the future.
-- |Feature| Data encryption mechanism.
-- |Feature| Possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
+- |Feature| A data encryption mechanism.
+- |Feature| A possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
 - |Feature| Add a possility to use 'UP' arrow key to return to previos a message.
 
   
