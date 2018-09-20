@@ -6,6 +6,8 @@ This is a C based chat for a linux terminal.
 Indeed it's a shmall project, that born from my attempts to improve C skills.
 But after a while I decided that this could be a chat with a versatile functionality.
 
+The idea is to built it completely using C.
+
 
 ### A short description
 There is no demand to be located in the same broadcast domain with other participants.
