@@ -54,7 +54,7 @@ int acceptConnection(int descriptor,struct sockaddr_in *structName,int *length);
 //
 int randomPort(void);								// random port for binding
 void introduction(void);							// show intro
-char * getDestName(char * string, char * name);					// get a destination name for a message
+char * getDestName(char * string, char * name);				// get a destination name for a message
 char * getMessageBody(char * string, char * message);				// get a destiantion text body for a message
 //
 void identification(int * descriptor, int * port, char * nickname);		// identify myself to a server
