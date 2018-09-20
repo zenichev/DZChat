@@ -7,7 +7,7 @@ Indeed it's a shmall project, that born from my attempts to improve C skills.
 But after a while I decided that this could be a chat with a versatile functionality.
 
 >------------------------------------------------------------------------------------------------------------------->
-* A short description*
+## A short description
 There is no demand to be located in the same broadcast domain with other participants.
 Data transmission works over the TCP (I'm not looking into the UDP, since I prefer to let the TCP perform it's work, and not to build a custom functionality to support the data transmission).
 
