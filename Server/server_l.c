@@ -1,8 +1,8 @@
 /* HEADER FILE INCLUDES */
-#include <sys/socket.h>	/* for socket(), bind(), connect(), recv() and send() */
+#include <sys/socket.h>		/* for socket(), bind(), connect(), recv() and send() */
 #include <netdb.h>		/* definitions for network database operations */
-#include <netinet/in.h>	/* Internet Protocol family */
-#include <arpa/inet.h>	/* definitions for internet operations */
+#include <netinet/in.h>		/* Internet Protocol family */
+#include <arpa/inet.h>		/* definitions for internet operations */
 
 #include <stdio.h>		/* for printf() and fprintf() */
 #include <string.h>		/* different manipulations over a char arrays, such as memset() */
@@ -10,15 +10,15 @@
 #include <unistd.h>		/* standard symbolic constants and types such as close(), read() */
 #include <stdlib.h>		/* malloc() , calloc(), free() , atof(), atoi(), atol() */
 
-#include <sys/types.h>	/* data types */
+#include <sys/types.h>		/* data types */
 #include <errno.h>		/* reporting and retrieving error conditions */
-#include <sys/wait.h>	/* for waitpid() */
-#include <sys/ipc.h>	/* interprocess communication access structure - ftok() */
-#include <sys/shm.h>	/* headers for shared memory mechanism */
+#include <sys/wait.h>		/* for waitpid() */
+#include <sys/ipc.h>		/* interprocess communication access structure - ftok() */
+#include <sys/shm.h>		/* headers for shared memory mechanism */
 
 #include <time.h>		/* time() */
-#include <pthread.h>	/* Threading */
-#include "server_listen_threads.h"	/* include my custom headers and definitions */
+#include <pthread.h>		/* Threading */
+#include "server_l.h"		/* include my custom headers and definitions */
 
 
 /* ----------------------------------- MAIN FUNCTION ----------------------------------- */
@@ -29,21 +29,21 @@ int main()
 	get_time currentTime;
 
 	int sock_desc=0, serverPort=0, clientSock=0;	// socket for server connections; server listening port; socket for client processing;
-	unsigned int threadCounter=0;		// Threads counter
+	unsigned int threadCounter=0;			// Threads counter
 	socklen_t clientLength;				// a length of a client socket
-	struct sockaddr_in server,client;	// add structures for client and server
-	handle_client initalParameters;		// for passing ip and socket to a handling thread
-	pthread_t threadID;					// thread id used to process threads
+	struct sockaddr_in server,client;		// add structures for client and server
+	handle_client initalParameters;			// for passing ip and socket to a handling thread
+	pthread_t threadID;				// thread id used to process threads
 
-	memset(&server,0,sizeof(server));	// null out a server structure
-	memset(&client,0,sizeof(client));	// null out a client structure
+	memset(&server,0,sizeof(server));		// null out a server structure
+	memset(&client,0,sizeof(client));		// null out a client structure
 
 	/* server related processing */
-	serverPort=addPort();							// ask a user for a port
-	sock_desc=socketDescriptor();					// open a socket descriptor for a server
-	sinStructure(&server,serverPort);				// define ip parameters for a server structure
+	serverPort=addPort();				// ask a user for a port
+	sock_desc=socketDescriptor();			// open a socket descriptor for a server
+	sinStructure(&server,serverPort);		// define ip parameters for a server structure
 	bindServer(sock_desc,&server,sizeof(server));	// associate and reserve a port for a socket
-	listenServer(sock_desc);						// start listening for connections
+	listenServer(sock_desc);			// start listening for connections
 
 	printf("INFO: Start the server on the port %d\n",serverPort);
 	for (;;)	// run forever
@@ -81,13 +81,13 @@ void * handleTCPClient(void * arguments)
 
 	/* passed structure to a thread */
 	handle_client * initial = (handle_client *) arguments;
-	int socket = (int ) initial->socket;		// socket used to process clients
-	char * ip = (char *) initial->ip;			// ip address of a connected client
+	int socket = (int ) initial->socket;					// socket used to process clients
+	char * ip = (char *) initial->ip;					// ip address of a connected client
 	unsigned int counter = (unsigned int) initial->counter;			// ip address of a connected client
 
 	client_parameters * clientStructuresList;				// for client parameters: name, id, socket, ip, port
 	int membersOnline=0, myID=0, recvMsgSize=0;				// members online counter; id for a current client; size of a received message;
-	char echoBuffer[RCVBUFSIZE], name[NAME_SIZE], port[6];	// Buffer for echo string; acceptable name size; clients binded port;
+	char echoBuffer[RCVBUFSIZE], name[NAME_SIZE], port[6];			// Buffer for echo string; acceptable name size; clients binded port;
 
 	memset(name,0,sizeof(name));
 	memset(echoBuffer,0,sizeof(echoBuffer));
@@ -105,7 +105,7 @@ void * handleTCPClient(void * arguments)
 	memset(echoBuffer,0,sizeof(echoBuffer));
 	//
 	myID=randomID();					// generate new id for a current client
-	membersOnline=onlineCounter(1);		// keep an online counter actual
+	membersOnline=onlineCounter(1);				// keep an online counter actual
 	//
 	clientStructuresList=clientsStructure(name, &myID, &socket, port, ip, membersOnline, &counter);	// update array of structures
 	int * currentList=setCurrentList(&myID, 1, clientStructuresList);								// add client to a list of IDs
@@ -128,14 +128,14 @@ void * handleTCPClient(void * arguments)
 client_parameters * clientsStructure(char * name, int * myID, int * socket, char * portListening, char * ip, int usersOnline, unsigned int * counter) {
 	static client_parameters params[1000];		// structure for client parameters
 
-	if (params[*myID].client_id != 0) {			// be sure that this id is not allocated yet for an other client
+	if (params[*myID].client_id != 0) {				// be sure that this id is not allocated yet for an other client
 		while(params[*myID].client_id != 0) *myID=randomID();
 	}
 
-	strcpy(params[*myID].nickname,name);			// set a client name to a structure
+	strcpy(params[*myID].nickname,name);				// set a client name to a structure
 	params[*myID].client_id = *myID;				// set a client id to a structure
 	params[*myID].socket = *socket;					// set a client socket to a structure
-	params[*myID].port = atoi(portListening);		// set a client port to a structure
+	params[*myID].port = atoi(portListening);			// set a client port to a structure
 	strcpy(params[*myID].ip,ip);					// set a client name to a structure
 	params[*myID].counter = *counter;				// set a thread number to a structure
 
