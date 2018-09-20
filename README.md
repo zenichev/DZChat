@@ -35,6 +35,7 @@ So for e.g., one client (client A) gets online, and then one more client (client
 - |Add a new transmission functionality| This will allow a newly connected user to get all the data about other users from scratch and not to ask the server for it in the future.
 - |Feature| Data encryption mechanism.
 - |Feature| Possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
+- |Feature| Add possility to use 'UP' arrow key to return to previos a message.
 
   
 ### Other:
