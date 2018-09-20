@@ -62,8 +62,8 @@ void chatting(int * descriptor, int * descriptorUAS, char * nickname);		// start
 //
 int structureAdd(char * sourceString, client_parameters * params, int * ids );	// update array of IDs - update local array structure
 int setCurrentList(int * passedID, client_parameters * infoClients, int * list);// update array of IDs - adding
-int delCurrentList(char * buffer, client_parameters * infoClients, int * list);	// update array of IDs - deletion
+int delCurrentList(char * buffer, client_parameters * infoClients, int * list);// update array of IDs - deletion
 //
-void * dataReceiving(void * arguments);						// threading for data receiving from a server
+void * dataReceiving(void * arguments);					// threading for data receiving from a server
 void * dataReceivingFromClients(void * arguments);				// threading for data receiving from other clients
 /* ----------------------------------- */
