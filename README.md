@@ -30,6 +30,7 @@ So for e.g., one client (client A) gets online, and then one more client (client
 
 
 ### To do:
+- |Feature| Group chatting. This will allow us to create groups and use them to broadcast messages to the members.
 - |Add a new command| '>online;'  - this command will allow users to see the list of online participants anytime.
 - |Add a new transmission functionality| This will allow a newly connected user to get all the data about other users from scratch and not to ask the server for it in the future.
 - |Feature| Data encryption mechanism.
