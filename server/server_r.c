@@ -1,3 +1,6 @@
+/* DZChat - Server. Sep 2018 @Donat Zenichev */
+/* Server related processing - binding, listening etc. */
+
 #include <stdio.h>      /* for printf() and fprintf() */
 #include <string.h>     /* different manipulations over a char arrays, such as memset() */
 #include <sys/socket.h> /* for socket(), bind(), connect(), recv() and send() */
