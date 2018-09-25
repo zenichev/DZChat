@@ -7,7 +7,12 @@ Indeed it's a shmall project, that born from my attempts to improve C skills.
 But after a while I decided that this could be a chat with a versatile functionality.
 
 The idea is to built it completely using C.
+First it worked using forking, then I decided to move it completely to threading.
 
+# How to
+You compile separately server and client.
+Server is used as a data server to keep all around updated. Client used an entering point to the chat.
+When you compile server/client do not forget to include an -lpthread option (in case you use gcc compiler).
 
 ### A short description
 There is no demand to be located in the same broadcast domain with other participants.
