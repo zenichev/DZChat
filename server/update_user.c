@@ -16,13 +16,13 @@ void chatting(char * buffer, int * socket, client_parameters * list, int * idLis
 	get_time currentTime;
 
 	int recvMsgSize=0;						// sive of a received message; an acceptable length of a name; an acceptable length of a message; 
-	memset((char *)buffer,0,RCVBUFSIZE);	// clear the buffer before to obtain a new data
+	memset((char *)buffer,0,RCVBUFSIZE);				// clear the buffer before to obtain a new data
 
 	// Start receiving a text message from a client
 	if ((recvMsgSize = recv(*socket, (char *)buffer, RCVBUFSIZE, 0)) < 0) printf("ERROR <%d>: Failed in receiving a message from client\n", *counter);
 
 	// Send received string and receive again until end of transmission
-	while (recvMsgSize > 0)		// zero indicates end of transmission
+	while (recvMsgSize > 0)						// zero indicates end of transmission
 	{
 		char *p=0; p=buffer;
 		int id=0;
@@ -31,7 +31,7 @@ void chatting(char * buffer, int * socket, client_parameters * list, int * idLis
 		if (strstr(buffer, "SYSTEM:USER_UPDATE")) {
 			printf("SYSTEM:USER_UPDATE: User <%s> requires updates\n",list->nickname);
 			giveUpdates(buffer, socket, list, idList, counter);
-			goto ALIAS_RECEIVE;	// no wait for new messsages from a client
+			goto ALIAS_RECEIVE;				// no wait for new messsages from a client
 		} else {
 			CURTIME;
 			printf("%s INFO: Message not for me. From user <%s>. \n", currentTime.buffer, list->nickname);
@@ -72,7 +72,7 @@ void giveUpdates(char * sourceString, int * socket, client_parameters * paramete
 	while(*ptrSrc && *ptrSrc != ':' && nameLength-->0)
 	{
 		if(strchr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789_",*ptrSrc)) { 
-			*nPtr++=*ptrSrc++;		// move the gotten char to name char array
+			*nPtr++=*ptrSrc++;			// move the gotten char to name char array
 		} else {
 			ptrSrc++;       			// if the char is not acceptable just move to another one
 		}
