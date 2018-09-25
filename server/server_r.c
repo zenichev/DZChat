@@ -3,13 +3,13 @@
 
 #include <stdio.h>		/* for printf() and fprintf() */
 #include <string.h>		/* different manipulations over a char arrays, such as memset() */
-#include <sys/socket.h>		/* for socket(), bind(), connect(), recv() and send() */
+#include <sys/socket.h>	/* for socket(), bind(), connect(), recv() and send() */
 #include <sys/types.h>		/* data types */
 #include "main.h"		/* include my custom headers and definitions */
 #include <errno.h>		/* reporting and retrieving error conditions */
 #include <stdlib.h>		/* malloc() , calloc(), free() , atof(), atoi(), atol() */
-#include <sys/socket.h>		/* for socket(), bind(), connect(), recv() and send() */
-#include <netinet/in.h>		/* Internet Protocol family */
+#include <sys/socket.h>	/* for socket(), bind(), connect(), recv() and send() */
+#include <netinet/in.h>	/* Internet Protocol family */
 #include <arpa/inet.h>		/* definitions for internet operations */
 
 /* SERVER RELATED */
