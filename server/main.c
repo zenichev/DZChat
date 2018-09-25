@@ -2,7 +2,7 @@
 /* file implementer */
 
 /* HEADER FILE INCLUDES */
-#include <sys/socket.h>		/* for socket(), bind(), connect(), recv() and send() */
+#include <sys/socket.h>	/* for socket(), bind(), connect(), recv() and send() */
 #include <netdb.h>		/* definitions for network database operations */
 #include <netinet/in.h>		/* Internet Protocol family */
 #include <arpa/inet.h>		/* definitions for internet operations */
