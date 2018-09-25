@@ -1,10 +1,10 @@
 /* DZChat - Server. Sep 2018 @Donat Zenichev */
 /* Other functionality */
 
-#include <stdio.h>    /* for printf() and fprintf() */
-#include <string.h>   /* different manipulations over a char arrays, such as memset() */
-#include <stdlib.h>   /* malloc() , calloc(), free() , atof(), atoi(), atol() */
-#include "main.h"     /* include my custom headers and definitions */
+#include <stdio.h>		/* for printf() and fprintf() */
+#include <string.h>		/* different manipulations over a char arrays, such as memset() */
+#include <stdlib.h>		/* malloc() , calloc(), free() , atof(), atoi(), atol() */
+#include "main.h"		/* include my custom headers and definitions */
 
 // Generate an unique ID for a new client
 int randomID(void) {
