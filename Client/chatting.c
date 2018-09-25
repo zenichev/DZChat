@@ -70,9 +70,9 @@ void chatting(int * descriptor, int * descriptorUAS, char * nickname, receive_ha
 		
 		// if a user sent a wrong syntax message
 		if( !strstr(echoString,":") && !strstr(echoString, "clear;") && !strstr(echoString, "quit;") ) {
-			printf("\nWARNING: Wrong syntax, use: <name>: <text-message> (without angle brackets)\n");
-			printf("***Try again: ");
-			fgets(echoString, RCVBUFSIZE, stdin);
+			printf("WARNING: Wrong syntax, use: <name>: <text-message> (without angle brackets)\n");
+			memset(echoString,0,echoStringLen);
+			continue;// return to the beginning
 		} else {
 			getDestName(echoString, name);              // set a destination name
 			getMessageBody(echoString, myMessage);      // set a message
