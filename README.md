@@ -7,7 +7,12 @@ Indeed it's a shmall project, that born from my attempts to improve C skills.
 But after a while I decided that this could be a chat with a versatile functionality.
 
 The idea is to built it completely using C.
+First it worked using forking, then I decided to move it completely to threading.
 
+### How to
+You compile separately a server and a client.
+Server is used as a data server to keep all around updated. Client used an entering point to the chat.
+When you compile server/client do not forget to include an -lpthread option (in case you use gcc compiler).
 
 ### A short description
 There is no demand to be located in the same broadcast domain with other participants.
@@ -30,7 +35,8 @@ So for e.g., one client (client A) gets online, and then one more client (client
 
 
 ### To do:
-- |Feature| Group chatting. This will allow us to create groups and use them to broadcast messages to the members.
+- |Refactoring| - rebuild the code to initalaize variables only with malloc() calloc() and release them with free()
+- |Feature| Group chatting. This will allow us to create groups and use them to "broadcast" messages to the members.
 - |Add a new command| '>online;'  - this command will allow users to see the list of online participants anytime.
 - |Feature| A data encryption mechanism.
 - |Feature| A possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
