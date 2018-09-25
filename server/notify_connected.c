@@ -2,10 +2,10 @@
 /* Thus functionality is responsible for notifying other members about newly connected user */
 /* Also a user that just connected get a list of online participants */
 
-#include <stdio.h>    /* for printf() and fprintf() */
-#include <string.h>   /* different manipulations over a char arrays, such as memset() */
-#include "main.h"     /* include my custom headers and definitions */
-#include <errno.h>    /* reporting and retrieving error conditions */
+#include <stdio.h>		/* for printf() and fprintf() */
+#include <string.h>		/* different manipulations over a char arrays, such as memset() */
+#include "main.h"		/* include my custom headers and definitions */
+#include <errno.h>		/* reporting and retrieving error conditions */
 
 /* Notify connected user how many online user do we have */
 /*----------------------------------------------------------------------------------------------------------------------------*/
@@ -15,7 +15,7 @@ void notificationOnline(int * list, client_parameters * params, int * socket, in
 
 	int id=0, temp=0, len=0;
 	// buffer for announces to a currently connected client
-	char notification[500], append[100];
+	char notification[500], append[100], header[29]="SYSTEM:SERVER_UPDATE:ONLINE=";
 	char connectedUser[NAME_SIZE], connectedUserIP[16], connectedUserListen[6], connectedUserID[5];
 
 	// clear char arrays before using
@@ -27,19 +27,21 @@ void notificationOnline(int * list, client_parameters * params, int * socket, in
 
 	CURTIME;
 	printf("%s INFO <%d>: The current list of clients online (currently: %d) :\n", currentTime.buffer, *counter, online);
+
+	// first add a header
+	snprintf(notification,sizeof(notification),"SYSTEM:SERVER_UPDATE:ONLINE=%d;",online);
 	for(int i=0;i<MAX_AVAILABLE;i++)
 	{
 		id = list[i];
 		if(id > 0) {	// check if a list value is set
-			snprintf(append,sizeof(append),"Users online <%d>: ",online);
-			snprintf(append,sizeof(append),"%s has id %d; ",params[id].nickname,params[id].client_id);
-			strcat(notification,append);      // append the gotten value to the notification char array
-			memset(append,0,sizeof(append));  // clear the append array
+			snprintf(append,sizeof(append),"%s:%d:0:%d:%s;",params[id].nickname, params[id].client_id, params[id].port, params[id].ip);
+			strcat(notification,append);		// append the gotten value to the notification char array
+			memset(append,0,sizeof(append));	// clear the append array
 			id=0;	// clear id
 		}
 	}
-	
-	if (notification != 0) {	// send a notice how many users are online to a client
+	// send a notice how many users are online to a client
+	if (notification != 0) {
 		strcat(notification,"\n");
 		len = strlen(notification);
 		if (send(*socket, notification, len, 0) != len) {
@@ -82,7 +84,7 @@ void notificationOnline(int * list, client_parameters * params, int * socket, in
 					printf("ERROR <%d>: Error to send() a notification to client - %s\n", *counter, strerror(errno));
 				} else {
 					CURTIME;
-					printf("%s MESSAGE OUT <%d>: notification about a new connection is sent to <%s:%d>\n", currentTime.buffer, *counter, params[temp].ip, params[temp].port);
+					printf("%s MESSAGE OUT <%d>: notification about a new connection is sent to <%s> socket:%d\n", currentTime.buffer, *counter, params[temp].ip, params[temp].socket);
 				}
 			}
 		}
