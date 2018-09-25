@@ -31,7 +31,7 @@ So for e.g., one client (client A) gets online, and then one more client (client
 
 ### To do:
 - |Refactoring| - rebuild the code to initalaize variables only with malloc() calloc() and release them with free()
-- |Feature| Group chatting. This will allow us to create groups and use them to broadcast messages to the members.
+- |Feature| Group chatting. This will allow us to create groups and use them to "broadcast" messages to the members.
 - |Add a new command| '>online;'  - this command will allow users to see the list of online participants anytime.
 - |Feature| A data encryption mechanism.
 - |Feature| A possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
