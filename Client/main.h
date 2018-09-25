@@ -7,7 +7,7 @@
 #define NICK_SIZE 20              // maximum nick size
 #define PORT_BIND_MIN 5100        // for listening
 #define PORT_BIND_MAX 5200        // for listening
-#define MAX_AVAILABLE_CLIENTS 20	// maximum clients for chatting
+#define MAX_AVAILABLE_CLIENTS 20  // maximum clients for chatting
 #define CURTIME time(&currentTime.rawtime);currentTime.info=localtime(&currentTime.rawtime);strftime(currentTime.buffer,80,"%I:%M:%S", currentTime.info)
 /* ----------------------------------- */
 
