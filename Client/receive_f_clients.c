@@ -31,17 +31,17 @@ void * dataReceivingFromClients(void * arguments) {
 		if ((recvMsgSize = recv(incomingSocket, echoBuffer, sizeof(echoBuffer), 0)) < 0) {
 			sleep(1);
 		} else {
-			if (strlen(echoBuffer) == 0) continue; 		// check if this is a null message
+			if (strlen(echoBuffer) == 0) continue;                                // check if this is a null message
 			if (!strstr(echoBuffer, "SYSTEM:USER_UPDATE")) {
 				CURTIME;
 				printf("\n> %s MESSAGE: %s", currentTime.buffer, echoBuffer); // if it is not a system message
 				printf("\n*** send a message>");
 				fflush( stdout );
 			}
-			memset(echoBuffer,0,sizeof(echoBuffer));	// null out a buffer
+			memset(echoBuffer,0,sizeof(echoBuffer));                              // null out a buffer
 			continue;
 		}
-		close(incomingSocket);							// close a used socket
+		close(incomingSocket);                                                        // close a used socket
 	}
 }
 /* ----------------------------------------------------------------------------------------- */
