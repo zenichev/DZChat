@@ -2,26 +2,26 @@
 /* file implementer */
 
 /* HEADER FILE INCLUDES */
-#include <sys/socket.h>   /* for socket(), bind(), connect(), recv() and send() */
-#include <netdb.h>        /* definitions for network database operations */
-#include <netinet/in.h>   /* Internet Protocol family */
-#include <arpa/inet.h>    /* definitions for internet operations */
+#include <sys/socket.h>		/* for socket(), bind(), connect(), recv() and send() */
+#include <netdb.h>		/* definitions for network database operations */
+#include <netinet/in.h>		/* Internet Protocol family */
+#include <arpa/inet.h>		/* definitions for internet operations */
 
-#include <stdio.h>        /* for printf() and fprintf() */
-#include <string.h>       /* different manipulations over a char arrays, such as memset() */
-#include <fcntl.h>        /* file control options such as open() */
-#include <unistd.h>       /* standard symbolic constants and types such as close(), read() */
-#include <stdlib.h>       /* malloc() , calloc(), free() , atof(), atoi(), atol() */
+#include <stdio.h>		/* for printf() and fprintf() */
+#include <string.h>		/* different manipulations over a char arrays, such as memset() */
+#include <fcntl.h>		/* file control options such as open() */
+#include <unistd.h>		/* standard symbolic constants and types such as close(), read() */
+#include <stdlib.h>		/* malloc() , calloc(), free() , atof(), atoi(), atol() */
 
-#include <sys/types.h>    /* data types */
-#include <errno.h>        /* reporting and retrieving error conditions */
-#include <sys/wait.h>     /* for waitpid() */
-#include <sys/ipc.h>      /* interprocess communication access structure - ftok() */
-#include <sys/shm.h>      /* headers for shared memory mechanism */
+#include <sys/types.h>		/* data types */
+#include <errno.h>		/* reporting and retrieving error conditions */
+#include <sys/wait.h>		/* for waitpid() */
+#include <sys/ipc.h>		/* interprocess communication access structure - ftok() */
+#include <sys/shm.h>		/* headers for shared memory mechanism */
 
-#include <time.h>         /* time() */
-#include <pthread.h>      /* Threading */
-#include "main.h"         /* include my custom headers and definitions */
+#include <time.h>		/* time() */
+#include <pthread.h>		/* Threading */
+#include "main.h"		/* include my custom headers and definitions */
 
 
 /* ----------------------------------- MAIN FUNCTION ----------------------------------- */
@@ -31,22 +31,22 @@ int main()
 
 	get_time currentTime;
 
-	int sock_desc=0, serverPort=0, clientSock=0;    // socket for server connections; server listening port; socket for client processing;
-	unsigned int threadCounter=0;                   // Threads counter
-	socklen_t clientLength;                         // a length of a client socket
-	struct sockaddr_in server,client;               // add structures for client and server
-	handle_client initalParameters;                 // for passing ip and socket to a handling thread
-	pthread_t threadID;                             // thread id used to process threads
+	int sock_desc=0, serverPort=0, clientSock=0;	// socket for server connections; server listening port; socket for client processing;
+	unsigned int threadCounter=0;			// Threads counter
+	socklen_t clientLength;				// a length of a client socket
+	struct sockaddr_in server,client;		// add structures for client and server
+	handle_client initalParameters;			// for passing ip and socket to a handling thread
+	pthread_t threadID;				// thread id used to process threads
 
-	memset(&server,0,sizeof(server));               // null out a server structure
-	memset(&client,0,sizeof(client));               // null out a client structure
+	memset(&server,0,sizeof(server));		// null out a server structure
+	memset(&client,0,sizeof(client));		// null out a client structure
 
 	/* server related processing */
-	serverPort=addPort();                           // ask a user for a port
-	sock_desc=socketDescriptor();                   // open a socket descriptor for a server
-	sinStructure(&server,serverPort);               // define ip parameters for a server structure
-	bindServer(sock_desc,&server,sizeof(server));   // associate and reserve a port for a socket
-	listenServer(sock_desc);                        // start listening for connections
+	serverPort=addPort();				// ask a user for a port
+	sock_desc=socketDescriptor();			// open a socket descriptor for a server
+	sinStructure(&server,serverPort);		// define ip parameters for a server structure
+	bindServer(sock_desc,&server,sizeof(server));	// associate and reserve a port for a socket
+	listenServer(sock_desc);			// start listening for connections
 
 	printf("INFO: Start the server on the port %d\n",serverPort);
 	for (;;)	// run forever
