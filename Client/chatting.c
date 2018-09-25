@@ -61,6 +61,13 @@ void chatting(int * descriptor, int * descriptorUAS, char * nickname, receive_ha
 			continue;// return to the beginning
 		}
 
+		// get online user list
+		if (strstr(echoString, "online;")) {
+			getOnliners(passStructure->parameters, passStructure->ids);
+			memset(echoString,0,echoStringLen);
+			continue;// return to the beginning
+		}
+		
 		// if a user sent a wrong syntax message
 		if( !strstr(echoString,":") && !strstr(echoString, "clear;") && !strstr(echoString, "quit;") ) {
 			printf("\nWARNING: Wrong syntax, use: <name>: <text-message> (without angle brackets)\n");
