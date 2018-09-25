@@ -7,7 +7,12 @@ Indeed it's a shmall project, that born from my attempts to improve C skills.
 But after a while I decided that this could be a chat with a versatile functionality.
 
 The idea is to built it completely using C.
+First it worked using forking, then I decided to move it completely to threading.
 
+### How to
+You compile separately a server and a client.
+Server is used as a data server to keep all around updated. Client used an entering point to the chat.
+When you compile server/client do not forget to include an -lpthread option (in case you use gcc compiler).
 
 ### A short description
 There is no demand to be located in the same broadcast domain with other participants.
@@ -30,11 +35,22 @@ So for e.g., one client (client A) gets online, and then one more client (client
 
 
 ### To do:
+- |Refactoring| - rebuild the code to initalaize variables only with malloc() calloc() and release them with free()
+- |Feature| Group chatting. This will allow us to create groups and use them to "broadcast" messages to the members.
 - |Add a new command| '>online;'  - this command will allow users to see the list of online participants anytime.
-- |Add a new transmission functionality| This will allow a newly connected user to get all the data about other users from scratch and not to ask the server for it in the future.
-- |Feature| Data encryption mechanism.
-- |Feature| Possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
+- |Feature| A data encryption mechanism.
+- |Feature| A possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
+- |Feature| Add a possility to use 'UP' arrow key to return to previos a message.
 
+### Features done:
+- |Add a new command| '>clear;'  - this command clears the terminal screen
+- |Add a new command| '>quit;'  - this command allows user to quit the chat
+- |Add a new transmission functionality| This allows a newly connected user to get all the data about other users from scratch and not to ask the server about each user(data) it in the future.
+- |Add a new transmission functionality| This allows user to get an infromation about user(data) from the server, in case we don't have required infromation in our local array
+- |Feature| - notify user when somebody disconnects
+- |Feature| - notify user when somebody connects
+- |Feature| - show to a newly connected user an online user list
+- |Feature| - process the wrong entering syntax (that could obtained from a user).
   
 ### Other:
 - New ideas are highly appriciated, and of course the contribution to the project too.
