@@ -18,12 +18,12 @@
 // store clients infomration is an array of structures
 typedef struct clients
 {
-	char nickname[NAME_SIZE];	// client name
-	int client_id;			// client id
-	int socket;			// client socket openned
-	char ip[15];			// ip address of a connected client
-	int port;			// port where client listens for direct connections from others
-	unsigned int counter;		// id for each client thread
+	char nickname[NAME_SIZE];		// client name
+	int client_id;				// client id
+	int socket;				// client socket openned
+	char ip[15];				// ip address of a connected client
+	int port;				// port where client listens for direct connections from others
+	unsigned int counter;			// id for each client thread
 } client_parameters;
 
 // for passing client variables into a handleTCPClient function
@@ -34,7 +34,7 @@ typedef struct handleClient
 	unsigned int counter;
 } handle_client;
 
-typedef struct getCurrentTime		// for timing in the messages
+typedef struct getCurrentTime			// for timing in the messages
 {
    time_t rawtime;
    struct tm *info;
@@ -46,17 +46,17 @@ typedef struct getCurrentTime		// for timing in the messages
 /* ----- FUNCTION DECLARATIONS ----- */
 
 /* Server related */
-int addPort(void);																	// ask user of the server for port
-int socketDescriptor(void);															// open socker descriptor
-void bindServer(int descriptor,struct sockaddr_in *structName,int size);			// bind socket to a port
-void listenServer(int descriptor);								// start listening
-void sinStructure(struct sockaddr_in *structName,int port);					// ip address/port structure for clients/server
+int addPort(void);									// ask user of the server for port
+int socketDescriptor(void);								// open socker descriptor
+void bindServer(int descriptor,struct sockaddr_in *structName,int size);		// bind socket to a port
+void listenServer(int descriptor);							// start listening
+void sinStructure(struct sockaddr_in *structName,int port);				// ip address/port structure for clients/server
 
 /* Client processing related */
-int acceptConnection(int descriptor,struct sockaddr_in *structName,int *length);		// wait for connection from a client
-void * handleTCPClient(void * arguments);							// handle client in a new thread
-char userIdentification(char * buffer,int size,char * name,char * port);			// get a client's name and a listening port (clients have separate port for listening)
-void notificationOnline(int * list, struct clients * shm, int * socket, int online,  unsigned int * counter);// notify a new client which online do we have now
+int acceptConnection(int descriptor,struct sockaddr_in *structName,int *length);	// wait for connection from a client
+void * handleTCPClient(void * arguments);						// handle client in a new thread
+char userIdentification(char * buffer,int size,char * name,char * port);		// get a client's name and a listening port (clients have separate port for listening)
+void notificationOnline(int * list, struct clients * shm, int * socket, int online,  unsigned int * counter);			// notify a new client which online do we have now
 //
 void chatting(char * buffer, int * socket, client_parameters * list, int * idList, unsigned int * counter);			// get informational requests from clients and answer on them
 void giveUpdates(char * sourceString, int * socket, client_parameters * parameters, int * idList, unsigned int * counter); 	// send user updates
