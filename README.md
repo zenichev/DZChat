@@ -37,12 +37,12 @@ So for e.g., one client (client A) gets online, and then one more client (client
 ### To do:
 - |Refactoring| - rebuild the code to initalaize variables only with malloc() calloc() and release them with free()
 - |Feature| Group chatting. This will allow us to create groups and use them to "broadcast" messages to the members.
-- |Add a new command| '>online;'  - this command will allow users to see the list of online participants anytime.
 - |Feature| A data encryption mechanism.
 - |Feature| A possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
 - |Feature| Add a possility to use 'UP' arrow key to return to previos a message.
 
 ### Features done:
+- |Add a new command| '>online;'  - this command will allow users to see the list of online participants anytime.
 - |Add a new command| '>clear;'  - this command clears the terminal screen
 - |Add a new command| '>quit;'  - this command allows user to quit the chat
 - |Add a new transmission functionality| This allows a newly connected user to get all the data about other users from scratch and not to ask the server about each user(data) it in the future.
