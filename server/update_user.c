@@ -1,12 +1,12 @@
 /* DZChat - Server. Sep 2018 @Donat Zenichev */
 /* interactions with users - it keeps users updated */
 
-#include <stdio.h>      /* for printf() and fprintf() */
-#include <string.h>     /* different manipulations over a char arrays, such as memset() */
-#include <sys/socket.h> /* for socket(), bind(), connect(), recv() and send() */
-#include <sys/types.h>  /* data types */
-#include "main.h"       /* include my custom headers and definitions */
-#include <unistd.h>     /* standard symbolic constants and types such as close(), read() */
+#include <stdio.h>		/* for printf() and fprintf() */
+#include <string.h>		/* different manipulations over a char arrays, such as memset() */
+#include <sys/socket.h>	/* for socket(), bind(), connect(), recv() and send() */
+#include <sys/types.h>	/* data types */
+#include "main.h"		/* include my custom headers and definitions */
+#include <unistd.h>		/* standard symbolic constants and types such as close(), read() */
 
 /* Functionaly for providing updates to users */
 /* It is also cab be used to process as intermideary proxy for sending messages, but for now it is deprecated */
@@ -15,14 +15,14 @@ void chatting(char * buffer, int * socket, client_parameters * list, int * idLis
 
 	get_time currentTime;
 
-	int recvMsgSize=0;                    // sive of a received message; an acceptable length of a name; an acceptable length of a message; 
-	memset((char *)buffer,0,RCVBUFSIZE);  // clear the buffer before to obtain a new data
+	int recvMsgSize=0;						// sive of a received message; an acceptable length of a name; an acceptable length of a message; 
+	memset((char *)buffer,0,RCVBUFSIZE);	// clear the buffer before to obtain a new data
 
 	// Start receiving a text message from a client
 	if ((recvMsgSize = recv(*socket, (char *)buffer, RCVBUFSIZE, 0)) < 0) printf("ERROR <%d>: Failed in receiving a message from client\n", *counter);
 
 	// Send received string and receive again until end of transmission
-	while (recvMsgSize > 0)               // zero indicates end of transmission
+	while (recvMsgSize > 0)		// zero indicates end of transmission
 	{
 		char *p=0; p=buffer;
 		int id=0;
@@ -31,7 +31,7 @@ void chatting(char * buffer, int * socket, client_parameters * list, int * idLis
 		if (strstr(buffer, "SYSTEM:USER_UPDATE")) {
 			printf("SYSTEM:USER_UPDATE: User <%s> requires updates\n",list->nickname);
 			giveUpdates(buffer, socket, list, idList, counter);
-			goto ALIAS_RECEIVE;               // no wait for new messsages from a client
+			goto ALIAS_RECEIVE;	// no wait for new messsages from a client
 		} else {
 			CURTIME;
 			printf("%s INFO: Message not for me. From user <%s>. \n", currentTime.buffer, list->nickname);
@@ -61,7 +61,7 @@ void chatting(char * buffer, int * socket, client_parameters * list, int * idLis
 void giveUpdates(char * sourceString, int * socket, client_parameters * parameters, int * idList, unsigned int * counter) {
 
 	int nameLength=NAME_SIZE, temp=0, updatesFound=0;
-	char askingName[NAME_SIZE], beginning[19]="SYSTEM:USER_UPDATE:", answer[RCVBUFSIZE]={0}, port[6]={0}, id[5]={0};
+	char askingName[NAME_SIZE], beginning[19]="SYSTEM:USER_UPDATE:", answer[RCVBUFSIZE]={0}, port[6]={0}, id[5]={0}, defaultAnswer[21] = "SYSTEM:USER_UPDATE:0";
 	char * ptrSrc; ptrSrc=sourceString;
 	char * nPtr; nPtr=askingName;
 	ptrSrc += sizeof(beginning);
@@ -83,34 +83,33 @@ void giveUpdates(char * sourceString, int * socket, client_parameters * paramete
 		if (idList[i] != 0) {
 			temp=idList[i];
 			if ( strstr(parameters[temp].nickname,askingName) ) {
-				strcpy(answer, beginning);                                                        // "SYSTEM:USER_UPDATE:"
-				strcat(answer, parameters[temp].nickname); strcat(answer, ":");                   // user nickname
-				snprintf(id, sizeof(id), "%d:", parameters[temp].client_id); strcat(answer, id);  // id
-				strcat(answer, "0:");                                                             // his socket, must be empty there
-				snprintf(port,sizeof(port),"%d:",parameters[temp].port); strcat(answer, port);    // user listening port
-				strcat(answer, parameters[temp].ip); strcat(answer, ":");                         // user ip address
+				strcpy(answer, beginning);																// "SYSTEM:USER_UPDATE:"
+				strcat(answer, parameters[temp].nickname); strcat(answer, ":");							// user nickname
+				snprintf(id, sizeof(id), "%d:", parameters[temp].client_id); strcat(answer, id); 		// id
+				strcat(answer, "0:");																	// his socket, must be empty there
+				snprintf(port,sizeof(port),"%d:",parameters[temp].port); strcat(answer, port);			// user listening port
+				strcat(answer, parameters[temp].ip); strcat(answer, ":");								// user ip address
 				updatesFound=1;
 				break;
 			}
 		}
 	}
-
 	switch(updatesFound) {
 		// found
 		case 1:
 			if (send(*socket, answer, RCVBUFSIZE, 0) != RCVBUFSIZE) {
-				printf("ERROR <%d>: Failed to send() message to client, SYSTEM:USER_UPDATE\n", *counter);
+				printf("ERROR <%d>: Failed to send() message to client socket <%d>, SYSTEM:USER_UPDATE\n", *counter, *socket);
 			}
 			break;
 		// not found
 		case 0:
-			if (send(*socket, "SYSTEM:USER_UPDATE:0", RCVBUFSIZE, 0) != RCVBUFSIZE) {
-				printf("ERROR <%d>: Failed to send() message to client, SYSTEM:USER_UPDATE\n", *counter);
+			if (send(*socket, defaultAnswer, sizeof(defaultAnswer), 0) != sizeof(defaultAnswer)) {
+				printf("ERROR <%d>: Failed to send() message to client socket <%d>, SYSTEM:USER_UPDATE\n", *counter, *socket);
 			}
 			break;
 		default:
-			if (send(*socket, "SYSTEM:USER_UPDATE:0", RCVBUFSIZE, 0) != RCVBUFSIZE) {
-				printf("ERROR <%d>: Failed to send() message to client, SYSTEM:USER_UPDATE\n", *counter);
+			if (send(*socket, defaultAnswer, sizeof(defaultAnswer), 0) != sizeof(defaultAnswer)) {
+				printf("ERROR <%d>: Failed to send() message to client socket <%d>, SYSTEM:USER_UPDATE\n", *counter, *socket);
 			}
 			break;
 	}
