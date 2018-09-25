@@ -1,9 +1,9 @@
 /* DZChat - Server. Sep 2018 @Donat Zenichev */
 /* Identify user that connects to us */
 
-#include <stdio.h>    /* for printf() and fprintf() */
-#include <string.h>   /* different manipulations over a char arrays, such as memset() */
-#include "main.h"     /* include my custom headers and definitions */
+#include <stdio.h>		/* for printf() and fprintf() */
+#include <string.h>		/* different manipulations over a char arrays, such as memset() */
+#include "main.h"		/* include my custom headers and definitions */
 
 /* Retrieve from a user name and his listening port (not the port used to connect to us) */
 /*----------------------------------------------------------------------------------------------------------------------------*/
@@ -20,16 +20,16 @@ char userIdentification(char * buffer,int size,char * name,char * port) {
 	while(*p && *p != '\"' && *p != '\'' && *p != ';' && *p != ' ' && *p != ':' && length-->0)
 	{
 		if(strchr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789_",*p)) {
-			*n++=*p++;      // move the gotten char to name char array
-			namesize++;     // count a name size
+			*n++=*p++;		// move the gotten char to name char array
+			namesize++;		// count a name size
 		} else {
-			p++;            // if the char is not acceptable just move to another one
+			p++;			// if the char is not acceptable just move to another one
 		}
 	}
 
 	/* get client port */
 	if ( strchr(":",*p) ) {				// colon is a delimiter for name and port
-		p++;                    		// move pointer from colon to a beginning port symbol
+		p++;					// move pointer from colon to a beginning port symbol
 		while (*p && portLengthAcceptable-->0)
 		{
 			if(strchr("0123456789",*p)) {
@@ -40,7 +40,7 @@ char userIdentification(char * buffer,int size,char * name,char * port) {
 			}
 		}
 	}
-	p -= (namesize+moveto+portLengthReal);		// move a pointer back to a beginning
-	memset(p,0,size);				// set passed buffer to null
+	p -= (namesize+moveto+portLengthReal);	// move a pointer back to a beginning
+	memset(p,0,size);			// set passed buffer to null
 }
 /*----------------------------------------------------------------------------------------------------------------------------*/
