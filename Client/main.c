@@ -26,6 +26,11 @@
 /* ----------------------------------- MAIN FUNCTION ----------------------------------- */
 int main()
 {
+	printf("-------------------------------------------------");
+	printf("\n| DZChat (terminal C based chat) Version 1.1.0  |");
+	printf("\n| Updates: https://github.com/zenichev/DZChat   |");
+	printf("\n-------------------------------------------------\n");
+	
 	char nickname[NICK_SIZE];                 // my own name
 	receive_handler passStructure;            // needed for passing different values to a thread (in the chatting function)
 
