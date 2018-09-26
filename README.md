@@ -33,7 +33,7 @@ So for e.g., one client (client A) gets online, and then one more client (client
 
 - If user doesn't have (for some reason) an infromation, that can be used to connect to a desired user, client sends an update request to the server, and server searches required data in his own array of structures. In a positive case, it answers with the needed infromation. In a negative case, it answers with zero '0' instead of a data, and that's how the client then understands that the user is offline (so he is able to notify user about it).
 
-![Image of Server](https://drive.google.com/file/d/1_uGRZgjdU6xfxtF_WgOyTYUMQkdT4yvf/view)
+![Image of Server](http://i.piccy.info/i9/8ebbfdea83f3d95962b0ccd9039467a6/1537955839/90782/1270172/Screenshot_from_2018_09_26_12_40_41.png)
 
 ### To do:
 - |Refactoring| - rebuild the code to initalaize variables only with malloc() calloc() and release them with free()
