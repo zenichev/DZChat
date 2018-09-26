@@ -27,8 +27,12 @@
 /* ----------------------------------- MAIN FUNCTION ----------------------------------- */
 int main()
 {
-	printf("INFO: DZChat (terminal C based chat) Version 1.1.0 \n");
-
+	printf("-------------------------------------------------");
+	printf("\n| Data server                                   |");
+	printf("\n| DZChat (terminal C based chat) Version 1.1.0  |");
+	printf("\n| Updates: https://github.com/zenichev/DZChat   |");
+	printf("\n-------------------------------------------------\n");
+	
 	get_time currentTime;
 
 	int sock_desc=0, serverPort=0, clientSock=0;	// socket for server connections; server listening port; socket for client processing;
@@ -42,9 +46,10 @@ int main()
 	memset(&client,0,sizeof(client));		// null out a client structure
 
 	/* server related processing */
+	addAddress(serverAddress);			// ask a user for a listening address
 	serverPort=addPort();				// ask a user for a port
 	sock_desc=socketDescriptor();			// open a socket descriptor for a server
-	sinStructure(&server,serverPort);		// define ip parameters for a server structure
+	sinStructure(&server,serverPort,serverAddress);	// define ip parameters for a server structure
 	bindServer(sock_desc,&server,sizeof(server));	// associate and reserve a port for a socket
 	listenServer(sock_desc);			// start listening for connections
 

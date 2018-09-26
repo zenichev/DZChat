@@ -47,10 +47,11 @@ typedef struct getCurrentTime			// for timing in the messages
 
 /* Server related */
 int addPort(void);									// ask user of the server for port
+char addAddress(char address[]);							// add ip address
 int socketDescriptor(void);								// open socker descriptor
 void bindServer(int descriptor,struct sockaddr_in *structName,int size);		// bind socket to a port
 void listenServer(int descriptor);							// start listening
-void sinStructure(struct sockaddr_in *structName,int port);				// ip address/port structure for clients/server
+void sinStructure(struct sockaddr_in *structName,int port,char address[]);		// ip address/port structure for clients/server
 
 /* Client processing related */
 int acceptConnection(int descriptor,struct sockaddr_in *structName,int *length);	// wait for connection from a client
