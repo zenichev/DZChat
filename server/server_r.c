@@ -36,10 +36,11 @@ int socketDescriptor(void) {
 }
 
 // ip address/port structure for clients/server
-void sinStructure(struct sockaddr_in *structName,int port) {
+void sinStructure(struct sockaddr_in *structName,int port,char address[]) {
+	if (!address) address = SERVER_IP;	// for listening
 	// set server structure parameters
 	structName->sin_family=AF_INET;
-	structName->sin_addr.s_addr=inet_addr(SERVER_IP);
+	structName->sin_addr.s_addr=inet_addr(address);
 	structName->sin_port=htons(port);
 }
 
