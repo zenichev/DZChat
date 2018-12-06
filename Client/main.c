@@ -30,7 +30,7 @@ int main()
 	printf("\n| DZChat (terminal C based chat) Version 1.1.0  |");
 	printf("\n| Updates: https://github.com/zenichev/DZChat   |");
 	printf("\n-------------------------------------------------\n");
-	
+
 	char nickname[NICK_SIZE];                 // my own name
 	receive_handler passStructure;            // needed for passing different values to a thread (in the chatting function)
 
@@ -56,18 +56,27 @@ int main()
 	addAddress(serverAddress);                // ask a user for a server address
 	serverPort=addPort();                     // ask a user for a server port
 	sock_desc_client=socketDescriptor();      // open a socket descriptor for a connection to a server
-	sinStructure(&client,serverPort,serverAddress);     // define ip parameters for a client structure
+	sinStructure(&client,serverPort,serverAddress);     			// define ip parameters for a client structure
 	clientLength=sizeof(client);
-	connection(sock_desc_client,&client,clientLength);	// connect to a server
+	connection(sock_desc_client,&client,clientLength);			// connect to a server
 	//
-	identification(&sock_desc_client, &port, nickname, &passStructure); // identify myself to a server
-	introduction();                                                     // show introduction to a user
+	identification(&sock_desc_client, &port, nickname, &passStructure);	// identify myself to a server
+	introduction();                                                     	// show introduction to a user
 
 	// pass needed values to a listening thread
 	passRecepient.socket = sock_desc;
 	passRecepient.uas = &uas;
 	// thread for messages from other clients
 	pthread_create(&threadID, NULL, dataReceivingFromClients, (void *) &passRecepient);
+	// thread for messages from the data server
+	passStructure.socket = sock_desc_client;
+	pthread_create(&threadID, NULL, dataReceiving, (void *) &passStructure);
+
+	char systemMessage[25] = "SYSTEM:GROUP_UPDATE:GET:";
+	if (send(sock_desc_client, systemMessage, sizeof(systemMessage), 0) != sizeof(systemMessage)) {
+		printf("ERROR: send() sent a different number of bytes than expected\n");
+	}
+
 	// start chatting
 	chatting(&sock_desc_client,&sock_desc, nickname, &passStructure);
 
