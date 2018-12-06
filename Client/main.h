@@ -84,11 +84,11 @@ void * dataReceivingFromClients(void * arguments);        	// threading for data
 void groupsImplementer( char * echoString, char * newGroupName, char * group_ids, group * newGroups, int * descriptor, int * ids, client_parameters * parameters, int * myID  );
 void groupAdd(group * newGroup, char * newName, char * ids, int * descriptor);				// create a new group
 char * getGroupName(char * buffer);									// retrieve a group name from the field
-void groupShow(group * newGroup);													// show a list of groups created
+void groupShow(group * newGroup);									// show a list of groups created
 void groupDel(group * group, char * name, int * descriptor);						// delete a group
 void groupJoin(group * group, char * name, int * myID, int * descriptor);				// join a group
 void groupQuit(group * group, char * name, int * myID, int * descriptor);				// quit a group
-void groupShowMembers(group * group, char * name, client_parameters * parameters, int * ids);									// show group members
+void groupShowMembers(group * group, char * name, client_parameters * parameters, int * ids);		// show group members
 void groupMessage(group * group, char * name, client_parameters * parameters, int * ids, char * message, int * myID);
 void receiveGroupUpdates( char * echoBuffer, group * newGroups, client_parameters * parameters);
 void receiveGroupUniqueUpdates( char * echoBuffer, group * newGroups, client_parameters * parameters );
