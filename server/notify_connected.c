@@ -1,5 +1,5 @@
 /* DZChat - Server. Dec 2018 @Donat Zenichev */
-/* Thus functionality is responsible for notifying other members about newly connected user */
+/* This functionality is responsible for notifying other members about newly connected user */
 /* Also a user that just connected get a list of online participants */
 
 #include <stdio.h>		/* for printf() and fprintf() */
