@@ -42,6 +42,7 @@ Client
 ![Image of Client](http://i.piccy.info/i9/4ccc785255c19a01f49a8afec4642c20/1537955960/81912/1270172/Screenshot_from_2018_09_26_12_40_31.png)
 
 Help
+
 ![Image of Client](http://i.piccy.info/i9/6fd974634745b6bf39bf429b72364ba7/1544099021/32122/1287039/Screenshot_from_2018_12_06_14_21_06.png)
 
 ### To do:
