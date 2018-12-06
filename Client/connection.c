@@ -1,4 +1,4 @@
-/* DZChat - Client. Sep 2018 @Donat Zenichev */
+/* DZChat - Client. Dec 2018 @Donat Zenichev */
 /* All the functionality is responsible for connections to remote server or members */
 /* Also the functions are responsible for listening */
 

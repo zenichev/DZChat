@@ -1,4 +1,4 @@
-/* DZChat - Client. Sep 2018 @Donat Zenichev */
+/* DZChat - Client. Dec 2018 @Donat Zenichev */
 /* There "sub-functions" for different purposes are stored */
 
 /* HEADER FILE INCLUDES */
@@ -22,5 +22,22 @@ void getOnliners(client_parameters * parameters, int * ids) {
 		}
 	}
 	printf(">------------------------------------------------------------------------------>\n");
+	temp=0;
+}
+/* ---------------------------------------------------------------------------------------- */
+
+/* ---------------------------------- GET MY OWN ID    ------------------------------------ */
+int getMyID(client_parameters * parameters, int * ids,  char * name) {
+	int myid=0, temp=0;
+	for(int i=0; i<MAX_AVAILABLE_CLIENTS; i++) {
+		if ( ids[i] > 0 ) {
+			temp = ids[i];
+			if ( strstr(parameters[temp].nickname, name) && strlen(parameters[temp].nickname) == strlen(name) ) {
+				myid = parameters[temp].client_id;
+				break;
+			}
+		}
+	}
+	return myid;
 }
 /* ---------------------------------------------------------------------------------------- */

@@ -1,4 +1,4 @@
-/* DZChat - Server. Sep 2018 @Donat Zenichev */
+/* DZChat - Server. Dec 2018 @Donat Zenichev */
 /* Server related processing - binding, listening etc. */
 
 #include <stdio.h>		/* for printf() and fprintf() */
@@ -23,6 +23,17 @@ int addPort(void) {
 		printf("ERROR: Wrong or misspelled port number - set to the default %d\n",serverPort);
 	}
 	return serverPort;
+}
+
+// add address for connection to a server
+char addAddress(char address[]) {
+	int temp=0;
+	// enter a port on which you want to listen
+	printf("*** Add an address for binding:");
+	if ( (temp=scanf("%s",address)) <= 0) {
+		strcpy(address,SERVER_IP);
+		printf("ERROR: Wrong or misspelled ip address - set to default %s\n",address);
+	}
 }
 
 // new socket descriptor

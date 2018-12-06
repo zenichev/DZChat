@@ -1,4 +1,4 @@
-/* DZChat - Client. Sep 2018 @Donat Zenichev */
+/* DZChat - Client. Dec 2018 @Donat Zenichev */
 /* This functionality is responsible for identification of myself to the data server */
 
 /* HEADER FILE INCLUDES */
@@ -37,12 +37,11 @@ void identification(int * descriptor, int * port, char * nickname, receive_handl
 	}
 	memset(identityString,0,identityLen);
 
-	// Receive a current information from a server
+	// Receive a current list of users online
 	if ((recvMsgSize = recv(*descriptor, echoBuffer, sizeof(echoBuffer), 0)) < 0) printf("ERROR: Error in receiving information from a server\n");
 
 	// update local data storage and get an amount of online participatns
-	if (strstr(echoBuffer, "SYSTEM:SERVER_UPDATE:ONLINE="))
-	online=getMembersData(echoBuffer, passStructure);
+	if (strstr(echoBuffer, "SYSTEM:SERVER_UPDATE:ONLINE="))	online=getMembersData(echoBuffer, passStructure);
 	CURTIME;
 	printf("\nINFO: List of clients online: %d", online);
 	memset(echoBuffer,0,sizeof(echoBuffer));
@@ -80,10 +79,10 @@ int getMembersData(char * echoBuffer, receive_handler * passStructure) {
 		// get amount of online members
 		while(*ptrSrc && *ptrSrc != ';' && *ptrSrc != '\0' && *ptrSrc != '\n')
 		{
-			if(strchr("0123456789",*ptrSrc)) {      // acceptable symbols for a name
-				*ptrOnline++=*ptrSrc++;               // move the gotten char to name char array
+			if(strchr("0123456789",*ptrSrc)) {	// acceptable symbols for a name
+				*ptrOnline++=*ptrSrc++;		// move the gotten char to name char array
 			} else {
-				ptrSrc++;                             // if the char is not acceptable just move to another one
+				ptrSrc++;			// if the char is not acceptable just move to another one
 			}
 		}
 
@@ -103,60 +102,60 @@ int getMembersData(char * echoBuffer, receive_handler * passStructure) {
 				while(*ptrSrc && *ptrSrc != ':' && *ptrSrc != ';' && maxFieldSize-->0)
 				{
 					if(strchr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789_",*ptrSrc)) {	// acceptable symbols for a name
-						*ptrN++=*ptrSrc++;                // move the gotten char to name char array
+						*ptrN++=*ptrSrc++;		// move the gotten char to name char array
 					} else {
-						ptrSrc++;                         // if the char is not acceptable just move to another one
+						ptrSrc++;			// if the char is not acceptable just move to another one
 					}			
 				}
-				maxFieldSize=50;	// reset max field size back to 50
-				ptrSrc++;			// move pointer to a next data field
+				maxFieldSize=50;				// reset max field size back to 50
+				ptrSrc++;					// move pointer to a next data field
 
 				// get a client_id - store it in the 'client_id'
 				while(*ptrSrc && *ptrSrc != ':' && *ptrSrc != ';' && maxFieldSize-->0)
 				{
 					if(strchr("0123456789",*ptrSrc)) {	// acceptable symbols for an ID
-						*ptrID++=*ptrSrc++;               // move the gotten char to name char array
+						*ptrID++=*ptrSrc++;		// move the gotten char to name char array
 					} else {
-						ptrSrc++;                         // if the char is not acceptable just move to another one
+						ptrSrc++;			// if the char is not acceptable just move to another one
 					}			
 				}
-				maxFieldSize=50;                      // reset max field size back to 50
-				ptrSrc++;                             // move pointer to a next data field
+				maxFieldSize=50;				// reset max field size back to 50
+				ptrSrc++;					// move pointer to a next data field
 
 				// get a client socket - store it in the 'clSocket'
 				while(*ptrSrc && *ptrSrc != ':' && *ptrSrc != ';' && maxFieldSize-->0)
 				{
 					if(strchr("0123456789",*ptrSrc)) {	// acceptable symbols for an ID
-						*ptrSct++=*ptrSrc++;              // move the gotten char to name char array
+						*ptrSct++=*ptrSrc++;		// move the gotten char to name char array
 					} else {
-						ptrSrc++;                         // if the char is not acceptable just move to another one
+						ptrSrc++;			// if the char is not acceptable just move to another one
 					}			
 				}
-				maxFieldSize=50;                      // reset max field size back to 50
-				ptrSrc++;                             // move pointer to a next data field
+				maxFieldSize=50;				// reset max field size back to 50
+				ptrSrc++;					// move pointer to a next data field
 
 				// get a port - store it in the 'port'
 				while(*ptrSrc && *ptrSrc != ':' && *ptrSrc != ';' && maxFieldSize-->0)
 				{
-					if(strchr("0123456789",*ptrSrc)) {  // acceptable symbols for an ID
-						*ptrP++=*ptrSrc++;                // move the gotten char to name char array
+					if(strchr("0123456789",*ptrSrc)) {	// acceptable symbols for an ID
+						*ptrP++=*ptrSrc++;		// move the gotten char to name char array
 					} else {
-						ptrSrc++;                         // if the char is not acceptable just move to another one
+						ptrSrc++;			// if the char is not acceptable just move to another one
 					}			
 				}
-				maxFieldSize=50;                      // reset max field size back to 50
-				ptrSrc++;                             // move pointer to a next data field
+				maxFieldSize=50;				// reset max field size back to 50
+				ptrSrc++;					// move pointer to a next data field
 
 				// get an ip address - store it in the 'ipAddr'
 				while(*ptrSrc && *ptrSrc != ':' && *ptrSrc != ';' && maxFieldSize-->0)
 				{
 					if(strchr("0123456789.",*ptrSrc)) {	// acceptable symbols for an ip address
-						*ptrIP++=*ptrSrc++;               // move the gotten char to name char array
+						*ptrIP++=*ptrSrc++;		// move the gotten char to name char array
 					} else {
-						ptrSrc++;                         // if the char is not acceptable just move to another one
+						ptrSrc++;			// if the char is not acceptable just move to another one
 					}			
 				}
-				maxFieldSize=50;                      // reset max field size back to 50
+				maxFieldSize=50;				// reset max field size back to 50
 
 				// here prtSrc stopped at last ';' before a next client data field and a cycle for a current data block is stopped
 				// we return back to the previouos cycle
@@ -179,11 +178,11 @@ int getMembersData(char * echoBuffer, receive_handler * passStructure) {
 				memset(addMember,0,strlen(addMember));
 
 				// reset pointers
-				ptrID = 0;	ptrID = client_id;        // for a client id
-				ptrN = 0;	ptrN = name;                // for a client name
-				ptrIP = 0;	ptrIP = ipAddr;           // for an ip address
-				ptrP = 0;	ptrP = port;                // for a port
-				ptrSct = 0;	ptrSct = clSocket;        // for a socket (not used now)
+				ptrID = 0;	ptrID = client_id;	// for a client id
+				ptrN = 0;	ptrN = name;		// for a client name
+				ptrIP = 0;	ptrIP = ipAddr;		// for an ip address
+				ptrP = 0;	ptrP = port;		// for a port
+				ptrSct = 0;	ptrSct = clSocket;	// for a socket (not used now)
 			}//---------------------------------------------------------------------------------------------------
 		}
 

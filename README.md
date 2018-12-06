@@ -39,11 +39,14 @@ Server
 
 Client
 
-![Image of Client](http://i.piccy.info/i9/4ccc785255c19a01f49a8afec4642c20/1537955960/81912/1270172/Screenshot_from_2018_09_26_12_40_31.png)
+![Image of Client](http://i.piccy.info/i9/cbd458188aadd3fc621b724e1882e74d/1544099134/62366/1287039/Screenshot_from_2018_12_06_14_23_30.png)
+
+Help
+
+![Image of Client](http://i.piccy.info/i9/6fd974634745b6bf39bf429b72364ba7/1544099021/32122/1287039/Screenshot_from_2018_12_06_14_21_06.png)
 
 ### To do:
 - |Refactoring| - rebuild the code to initalaize variables only with malloc() calloc() and release them with free()
-- |Feature| Group chatting. This will allow us to create groups and use them to "broadcast" messages to the members.
 - |Feature| A data encryption mechanism.
 - |Feature| A possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
 - |Feature| Add a possility to use 'UP' arrow key to return to previos a message.
@@ -61,6 +64,7 @@ Client
 - |Feature| - notify user when somebody connects
 - |Feature| - show to a newly connected user an online user list
 - |Feature| - process the wrong entering syntax (that could obtained from a user).
-  
+- |Feature| Group chatting. This allows us to create groups and use them to "broadcast" messages to the members.
+
 ### Other:
 - New ideas are highly appriciated, and of course the contribution to the project too.

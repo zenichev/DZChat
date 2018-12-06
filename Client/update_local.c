@@ -1,4 +1,4 @@
-/* DZChat - Client. Sep 2018 @Donat Zenichev */
+/* DZChat - Client. Dec 2018 @Donat Zenichev */
 /* This functionality is responsible for updating of the local array of structures */
 /* This array keeps the data of other clients needed to connect to them */
 
@@ -18,7 +18,7 @@ int structureAdd(char * sourceString, client_parameters * params, int * ids ) {
 	get_time currentTime;
 
 	// returning value
-	int result=0;
+	int result=0, temp=0;
 
 	// arrays to store an information
 	char name[21]={0}, id[5]={0}, port[6]={0}, socket[2]={0}, ip[15]={0};
@@ -100,6 +100,18 @@ int structureAdd(char * sourceString, client_parameters * params, int * ids ) {
 	}
 
 	ptrSrc=0; nPtr=0; idPtr=0; sPtr=0; portPtr=0, ipPtr=0;	// clear pointers values
+
+	// if we already have a user in our local array - do not readd it again
+	for(int i=0; i<MAX_AVAILABLE_CLIENTS; i++)
+	{
+		if ( (ids[i] > 0) && (ids[i] == atoi(id)) ) {
+			temp=ids[i];
+			if ( strstr(params[temp].nickname, name) && strlen(params[temp].nickname) == strlen(name) ) {
+				printf("DEBUG: we do not need to add a user, he already exists \n");
+				return atoi(id);
+			}
+		}
+	}
 
 	strcpy(params[atoi(id)].nickname, name);      // set a client name to a structure
 	params[atoi(id)].client_id = atoi(id);        // set a client id to a structure

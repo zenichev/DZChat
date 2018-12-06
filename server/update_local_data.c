@@ -1,4 +1,4 @@
-/* DZChat - Server. Sep 2018 @Donat Zenichev */
+/* DZChat - Server. Dec 2018 @Donat Zenichev */
 /* Keep local arrays of structures updates */
 
 #include <stdio.h>		/* for printf() and fprintf() */
