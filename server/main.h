@@ -5,14 +5,14 @@
 
 /* ----- PRE-PROCESSOR DIRECTIVE ----- */
 #define SERVER_PORT 5000			// default port for listening
-#define SERVER_IP "127.0.0.1"		// ip to listen for
+#define SERVER_IP "127.0.0.1"			// ip to listen for
 #define MAX_AVAILABLE 20			// maximum available clients
 #define RCVBUFSIZE 50000			// receive buffer for each message
-#define ID_STRING "z9HG4bk:"		// string used to identify identification process
+#define ID_STRING "z9HG4bk:"			// string used to identify identification process
 #define NAME_SIZE 20				// acceptable name size
-#define MAX_AVAILABLE_CLIENTS 20	// maximum clients for chatting
-#define MAX_AVAILABLE_GROUP_MEMBERS 20   // maximum group members in a one group
-#define MAX_AVAILABLE_GROUPS 10		// maximum groups can be created
+#define MAX_AVAILABLE_CLIENTS 20		// maximum clients for chatting
+#define MAX_AVAILABLE_GROUP_MEMBERS 20		// maximum group members in a one group
+#define MAX_AVAILABLE_GROUPS 10			// maximum groups can be created
 #define CURTIME time(&currentTime.rawtime);currentTime.info=localtime(&currentTime.rawtime);strftime(currentTime.buffer,80,"%I:%M:%S%p", currentTime.info)
 /* ----------------------------------- */
 
@@ -21,19 +21,19 @@
 // groups
 typedef struct groups
 {
-	char groupName[NAME_SIZE];					//name for the group
-	int groupIDs[MAX_AVAILABLE_GROUP_MEMBERS];	//members in the group
+	char groupName[NAME_SIZE];				//name for the group
+	int groupIDs[MAX_AVAILABLE_GROUP_MEMBERS];		//members in the group
 } group;
 
 // store clients infomration is an array of structures
 typedef struct clients
 {
-	char nickname[NAME_SIZE];		// client name
-	int client_id;					// client id
+	char nickname[NAME_SIZE];				// client name
+	int client_id;						// client id
 	int socket;						// client socket openned
-	char ip[15];					// ip address of a connected client
+	char ip[15];						// ip address of a connected client
 	int port;						// port where client listens for direct connections from others
-	unsigned int counter;			// id for each client thread
+	unsigned int counter;					// id for each client thread
 } client_parameters;
 
 // for passing client variables into a handleTCPClient function
@@ -45,7 +45,7 @@ typedef struct handleClient
 	group groups[MAX_AVAILABLE_GROUPS];
 } handle_client;
 
-typedef struct getCurrentTime			// for timing in the messages
+typedef struct getCurrentTime					// for timing in the messages
 {
    time_t rawtime;
    struct tm *info;
