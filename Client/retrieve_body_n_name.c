@@ -1,4 +1,4 @@
-/* DZChat - Client. Sep 2018 @Donat Zenichev */
+/* DZChat - Client. Dec 2018 @Donat Zenichev */
 /* Process a user's entered data and get a destination name from it and a message body */
 
 /* HEADER FILE INCLUDES */
@@ -39,9 +39,9 @@ char * getMessageBody(char * string, char * message) {
 	while(*p && *p != ':' && messageLength-->0)
 	{
 		if(strchr("'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789_!? ",*p)) {	// acceptable symbols for a name
-			*m++=*p++;		// move the gotten char to name char array
+			*m++=*p++;	// move the gotten char to name char array
 		} else {
-			p++;          // if the char is not acceptable just move to another one
+			p++;		// if the char is not acceptable just move to another one
 		}
 	}
 	p=0; m=0;
