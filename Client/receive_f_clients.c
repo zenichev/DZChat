@@ -1,4 +1,4 @@
-/* DZChat - Client. Sep 2018 @Donat Zenichev */
+/* DZChat - Client. Dec 2018 @Donat Zenichev */
 /* This functionality is responsible for data receiving from other clients */
 /* It's started from a separate thread */
 
@@ -29,10 +29,10 @@ void * dataReceivingFromClients(void * arguments) {
 
 		// try to receive an echo returned from a server
 		if ((recvMsgSize = recv(incomingSocket, echoBuffer, sizeof(echoBuffer), 0)) < 0) {
-			sleep(1);
+			sleep(0.5);
 		} else {
 			if (strlen(echoBuffer) == 0) continue;                                // check if this is a null message
-			if (!strstr(echoBuffer, "SYSTEM:USER_UPDATE")) {
+			if (!strstr(echoBuffer, "SYSTEM:")) {
 				CURTIME;
 				printf("\n> %s MESSAGE: %s", currentTime.buffer, echoBuffer); // if it is not a system message
 				printf("\n*** send a message>");
