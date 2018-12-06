@@ -1,4 +1,4 @@
-/* DZChat - Server. Sep 2018 @Donat Zenichev */
+/* DZChat - Server. Dec 2018 @Donat Zenichev */
 /* interactions with users - it keeps users updated */
 
 #include <stdio.h>		/* for printf() and fprintf() */
@@ -11,7 +11,7 @@
 /* Functionaly for providing updates to users */
 /* It is also cab be used to process as intermideary proxy for sending messages, but for now it is deprecated */
 /*----------------------------------------------------------------------------------------------------------------------------*/
-void chatting(char * buffer, int * socket, client_parameters * list, int * idList, unsigned int * counter) {
+void chatting(char * buffer, int * socket, client_parameters * list, int * idList, unsigned int * counter, group * groups) {
 
 	get_time currentTime;
 
@@ -26,6 +26,12 @@ void chatting(char * buffer, int * socket, client_parameters * list, int * idLis
 	{
 		char *p=0; p=buffer;
 		int id=0;
+
+		// some group updates received
+		if (strstr(buffer, "SYSTEM:GROUP_UPDATE:")) {
+			groupsImplementer( buffer, list, idList, groups, socket, counter );
+			goto ALIAS_RECEIVE;
+		}
 
 		// check if a user asks us for updates
 		if (strstr(buffer, "SYSTEM:USER_UPDATE")) {
