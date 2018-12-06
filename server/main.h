@@ -12,7 +12,7 @@
 #define NAME_SIZE 20				// acceptable name size
 #define MAX_AVAILABLE_CLIENTS 20		// maximum clients for chatting
 #define MAX_AVAILABLE_GROUP_MEMBERS 20		// maximum group members in a one group
-#define MAX_AVAILABLE_GROUPS 10			// maximum groups can be created
+#define MAX_AVAILABLE_GROUPS 10		// maximum groups can be created
 #define CURTIME time(&currentTime.rawtime);currentTime.info=localtime(&currentTime.rawtime);strftime(currentTime.buffer,80,"%I:%M:%S%p", currentTime.info)
 /* ----------------------------------- */
 
