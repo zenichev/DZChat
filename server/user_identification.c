@@ -1,4 +1,4 @@
-/* DZChat - Server. Sep 2018 @Donat Zenichev */
+/* DZChat - Server. Dec 2018 @Donat Zenichev */
 /* Identify user that connects to us */
 
 #include <stdio.h>		/* for printf() and fprintf() */
