@@ -1,3 +1,6 @@
+/* DZChat - Client. Dec 2018 @Donat Zenichev */
+/* Headers */
+
 #include <time.h>
 
 /* ----- PRE-PROCESSOR DIRECTIVE ----- */
