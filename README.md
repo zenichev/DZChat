@@ -39,7 +39,7 @@ Server
 
 Client
 
-![Image of Client](http://i.piccy.info/i9/4ccc785255c19a01f49a8afec4642c20/1537955960/81912/1270172/Screenshot_from_2018_09_26_12_40_31.png)
+![Image of Client](http://i.piccy.info/i9/cbd458188aadd3fc621b724e1882e74d/1544099134/62366/1287039/Screenshot_from_2018_12_06_14_23_30.png)
 
 Help
 
