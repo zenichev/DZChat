@@ -65,7 +65,7 @@ int acceptConnection(int descriptor,struct sockaddr_in *structName,int *length);
 int randomPort(void);						// random port for binding
 void introduction(void);					// start intro
 void help(void);						// help intro
-char * getDestName(char * string, char * name);			// get a destination name for a message
+char * getDestName(char * string, char * name);		// get a destination name for a message
 char * getMessageBody(char * string, char * message);		// get a destiantion text body for a message
 void getOnliners(client_parameters * parameters, int * ids);	// get a list of online participants
 int getMyID(client_parameters * parameters, int * ids,  char * name);	// get my own id
@@ -76,7 +76,7 @@ void chatting(int * descriptor, int * descriptorUAS, char * nickname, receive_ha
 //
 int structureAdd(char * sourceString, client_parameters * params, int * ids );				// update array of IDs - update local array structure
 int setCurrentList(int * passedID, client_parameters * infoClients, int * list);			// update array of IDs - adding
-int delCurrentList(char * buffer, client_parameters * infoClients, int * list);				// update array of IDs - deletion
+int delCurrentList(char * buffer, client_parameters * infoClients, int * list);			// update array of IDs - deletion
 //
 void * dataReceiving(void * arguments);                   	// threading for data receiving from a server
 void * dataReceivingFromClients(void * arguments);        	// threading for data receiving from other clients
