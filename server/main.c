@@ -4,7 +4,7 @@
 /* HEADER FILE INCLUDES */
 #include <sys/socket.h>	/* for socket(), bind(), connect(), recv() and send() */
 #include <netdb.h>		/* definitions for network database operations */
-#include <netinet/in.h>		/* Internet Protocol family */
+#include <netinet/in.h>	/* Internet Protocol family */
 #include <arpa/inet.h>		/* definitions for internet operations */
 
 #include <stdio.h>		/* for printf() and fprintf() */
@@ -35,24 +35,24 @@ int main()
 
 	get_time currentTime;
 
-	char serverAddress[17];                 // the format is with quotes and dotes: "000.000.000.000"
+	char serverAddress[17];                 	// the format is with quotes and dotes: "000.000.000.000"
 	int sock_desc=0, serverPort=0, clientSock=0;	// socket for server connections; server listening port; socket for client processing;
 	unsigned int threadCounter=0;			// Threads counter
-	socklen_t clientLength;					// a length of a client socket
+	socklen_t clientLength;				// a length of a client socket
 	struct sockaddr_in server,client;		// add structures for client and server
 	handle_client initalParameters;			// for passing ip and socket to a handling thread
-	pthread_t threadID;						// thread id used to process threads
+	pthread_t threadID;				// thread id used to process threads
 
 	memset(&server,0,sizeof(server));		// null out a server structure
 	memset(&client,0,sizeof(client));		// null out a client structure
 
 	/* server related processing */
-	addAddress(serverAddress);              // ask a user for a listening address
-	serverPort=addPort();					// ask a user for a port
+	addAddress(serverAddress);              	// ask a user for a listening address
+	serverPort=addPort();				// ask a user for a port
 	sock_desc=socketDescriptor();			// open a socket descriptor for a server
 	sinStructure(&server,serverPort,serverAddress);	// define ip parameters for a server structure
 	bindServer(sock_desc,&server,sizeof(server));	// associate and reserve a port for a socket
-	listenServer(sock_desc);				// start listening for connections
+	listenServer(sock_desc);			// start listening for connections
 
 	// initialize arrays of structures for groups
 	for(int i=0; i<MAX_AVAILABLE_GROUPS; i++) {
