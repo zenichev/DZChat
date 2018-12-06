@@ -43,7 +43,6 @@ Client
 
 ### To do:
 - |Refactoring| - rebuild the code to initalaize variables only with malloc() calloc() and release them with free()
-- |Feature| Group chatting. This will allow us to create groups and use them to "broadcast" messages to the members.
 - |Feature| A data encryption mechanism.
 - |Feature| A possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
 - |Feature| Add a possility to use 'UP' arrow key to return to previos a message.
@@ -61,6 +60,7 @@ Client
 - |Feature| - notify user when somebody connects
 - |Feature| - show to a newly connected user an online user list
 - |Feature| - process the wrong entering syntax (that could obtained from a user).
-  
+- |Feature| Group chatting. This allows us to create groups and use them to "broadcast" messages to the members.
+
 ### Other:
 - New ideas are highly appriciated, and of course the contribution to the project too.
