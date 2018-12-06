@@ -1,4 +1,4 @@
-/* DZChat - Server. Sep 2018 @Donat Zenichev */
+/* DZChat - Server. Dec 2018 @Donat Zenichev */
 /* Thus functionality is responsible for notifying other members about newly connected user */
 /* Also a user that just connected get a list of online participants */
 
@@ -9,13 +9,13 @@
 
 /* Notify connected user how many online user do we have */
 /*----------------------------------------------------------------------------------------------------------------------------*/
-void notificationOnline(int * list, client_parameters * params, int * socket, int online, unsigned int * counter) {
+void notificationOnline(int * list, client_parameters * params, int * socket, int online, unsigned int * counter, group * groups) {
 
 	get_time currentTime;
 
-	int id=0, temp=0, len=0;
+	int id=0, temp=0, len=0, group_id=0, groups_found=0, group_members_found=0;
 	// buffer for announces to a currently connected client
-	char notification[500], append[100], header[29]="SYSTEM:SERVER_UPDATE:ONLINE=";
+	char notification[1000], append[100], header[29]="SYSTEM:SERVER_UPDATE:ONLINE=", header_groups[21]="SYSTEM:GROUP_UPDATE:";
 	char connectedUser[NAME_SIZE], connectedUserIP[16], connectedUserListen[6], connectedUserID[5];
 
 	// clear char arrays before using
@@ -28,7 +28,7 @@ void notificationOnline(int * list, client_parameters * params, int * socket, in
 	CURTIME;
 	printf("%s INFO <%d>: The current list of clients online (currently: %d) :\n", currentTime.buffer, *counter, online);
 
-	// first add a header
+	// update user with current clients online
 	snprintf(notification,sizeof(notification),"SYSTEM:SERVER_UPDATE:ONLINE=%d;",online);
 	for(int i=0;i<MAX_AVAILABLE;i++)
 	{
@@ -81,7 +81,8 @@ void notificationOnline(int * list, client_parameters * params, int * socket, in
 
 				len = strlen(notification);
 				if(send(params[temp].socket, notification, len, 0) != len) {
-					printf("ERROR <%d>: Error to send() a notification to client - %s\n", *counter, strerror(errno));
+					CURTIME;
+					printf("%s ERROR <%d>: Error to send() a notification to client - %s\n", currentTime.buffer, *counter, strerror(errno));
 				} else {
 					CURTIME;
 					printf("%s MESSAGE OUT <%d>: notification about a new connection is sent to <%s> socket:%d\n", currentTime.buffer, *counter, params[temp].ip, params[temp].socket);
