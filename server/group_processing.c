@@ -20,9 +20,6 @@ void groupsImplementer(char * buffer, client_parameters * parameters, int * ids,
     // QUIT - somebody quit
     // GET - get updates to user
 
-    //char * srcPtr; srcPtr = buffer;
-    //srcPtr += 21; //"SYSTEM:GROUP_UPDATE:"
-
     if (strstr(buffer, "SYSTEM:GROUP_UPDATE:ADD:")) groupAdd( buffer, parameters, ids, groups, counter );
     if (strstr(buffer, "SYSTEM:GROUP_UPDATE:DEL:")) groupDel( buffer, parameters, ids, groups, counter );
     if (strstr(buffer, "SYSTEM:GROUP_UPDATE:JOIN:")) groupJoin( buffer, parameters, ids, groups, counter );
@@ -364,21 +361,17 @@ void groupSendUniqueUpdate(char * action, char * groupName, char * memberID, cli
     goto ALIAS_CLEAR_VARIABLES;//if no acceptable action is gotten
 
     ADD: strcat(command, groupName); strcat(command, ";");
-    //strcat(notification, groupName); strcat(notification, "> group created.");  // "_<group_name> group created."
     goto SEND;
 
     DEL: strcat(command, groupName); strcat(command, ";");
-    //strcat(notification, groupName); strcat(notification, "> group deleted.");  // "_<group_name> group deleted."
     goto SEND;
 
     JOIN: strcat(command, groupName); strcat(command, ":");
     strcat(command, memberID); strcat(command, ";");
-    //strcat(notification, groupName); strcat(notification, "> "); strcat(notification, memberID); strcat(notification, " joined."); // "_<group_name> somebody joined."
     goto SEND;
 
     QUIT: strcat(command, groupName); strcat(command, ":");
     strcat(command, memberID); strcat(command, ";");
-    //strcat(notification, groupName); strcat(notification, "> "); strcat(notification, memberID); strcat(notification, " quit."); // "_<group_name> somebody quit."
     goto SEND;
 
     SEND: for (int i=0; i<MAX_AVAILABLE_CLIENTS; i++) {
