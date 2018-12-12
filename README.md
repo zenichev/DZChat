@@ -50,9 +50,6 @@ Help
 - |Feature| A data encryption mechanism.
 - |Feature| A possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
 - |Feature| Add a possility to use 'UP' arrow key to return to previos a message.
-- |Bug| improve a comparison mechanism when trying to find a destination name in a local array.
-        Now if you have for e.g. 'donat' as a value for a nickname member for one of a structures in your local array,
-        the 'd:' will match it, as well as the 'donat:' matches.
 
 ### Features done:
 - |Add a new command| '>online;'  - this command will allow users to see the list of online participants anytime.
@@ -65,6 +62,11 @@ Help
 - |Feature| - show to a newly connected user an online user list
 - |Feature| - process the wrong entering syntax (that could obtained from a user).
 - |Feature| Group chatting. This allows us to create groups and use them to "broadcast" messages to the members.
+
+### Other done:
+- |Bug| improve a comparison mechanism when trying to find a destination name in a local array.
+        Now if you have for e.g. 'donat' as a value for a nickname member for one of a structures in your local array,
+        the 'd:' will match it, as well as the 'donat:' matches.
 
 ### Other:
 - New ideas are highly appriciated, and of course the contribution to the project too.
