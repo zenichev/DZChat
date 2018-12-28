@@ -50,6 +50,7 @@ Help
 - |Feature| A data encryption mechanism.
 - |Feature| A possiblity to facilitate NAT traversal betweeb users. And between a user and a server.
 - |Feature| Add a possility to use 'UP' arrow key to return to previos a message.
+- |Add a new transmission functionality| If data server is down, client app must notify a user.
 
 ### Features done:
 - |Add a new command| '>online;'  - this command will allow users to see the list of online participants anytime.
